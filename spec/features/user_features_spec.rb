@@ -13,6 +13,7 @@ describe 'user signup', :type => :feature do
 
   it 'remains logged in after signing up' do 
     signup_valid
+    # save_and_open_page
     click_link('New Post')
     expect(page).to have_content("#{@kitten.name}")
     expect(page.get_rack_session_key('user_id')).to_not eq(nil)
@@ -65,6 +66,7 @@ describe 'user authorization before certain actions' do
     @post = @crookshanks.posts.create(name: "post title", content: "post content")
     visit '/'
     click_link('post title')
+    # save_and_open_page
     expect(current_path).to eq("/posts/#{@post.id}")
     expect(page).to have_content('Log In to Comment!')
     expect(page).to have_no_content('Post a new comment:')

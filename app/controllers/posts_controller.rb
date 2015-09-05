@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  skip_before_action :login_required, :only => [:index, :show]
 
   def index
     @posts = Post.all
@@ -56,4 +57,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:name, :content, :user_id, :tag_ids => [], :tags_attributes => [:id, :name], :comments_attributes => [:content, :user_id])
     end
+
 end
